@@ -6,7 +6,7 @@
 /*   By: dsoroko <dsoroko@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 16:18:28 by dsoroko           #+#    #+#             */
-/*   Updated: 2022/05/23 10:57:48 by dsoroko          ###   ########.fr       */
+/*   Updated: 2022/05/23 16:38:43 by dsoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ char	*make_new_line(char *str)
 
 /**
  * @brief
- *  The function clean_up takes the stash and cleans it up, ie gets rid of the
- *	line that is retuned by get_next_line.
+ *  The function clean_up takes the stash and cleans it up
  */
 
 char	*clean_the_rest(char *str)
@@ -67,6 +66,8 @@ char	*clean_the_rest(char *str)
 		return (NULL);
 	}
 	new_str = malloc((ft_strlen(str) - i + 1) * sizeof(char));
+	if (!new_str)
+		return (NULL);
 	i++;
 	j = 0;
 	while (str[i] != '\0')
@@ -94,7 +95,7 @@ char	*read_and_stash(int fd, char *str)
 	while (!ft_strchr(str, '\n') && char_count != 0)
 	{
 		char_count = read(fd, temp, BUFFER_SIZE);
-		if (char_count == -1)
+		if (char_count == 1)
 		{
 			free(temp);
 			return (NULL);

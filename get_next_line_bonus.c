@@ -6,7 +6,7 @@
 /*   By: dsoroko <dsoroko@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:21:36 by dsoroko           #+#    #+#             */
-/*   Updated: 2022/05/23 11:46:20 by dsoroko          ###   ########.fr       */
+/*   Updated: 2022/05/23 17:33:09 by dsoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ char	*clean_the_rest(char *str)
 		return (NULL);
 	}
 	new_str = malloc((ft_strlen(str) - i + 1) * sizeof(char));
+	if (!new_str)
+		return (NULL);
 	i++;
 	j = 0;
 	while (str[i] != '\0')
