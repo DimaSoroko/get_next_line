@@ -121,19 +121,19 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-// #include <stdio.h>
-// #include <fcntl.h>
-// int main()
-// {
-// 	int fd;
-// 	fd = open("t.txt", O_RDONLY);
-// 	char *str;
-// 	str = get_next_line(fd);
-// 	printf("%s", str);
-// 	while (str)
-// 	{
-// 		str = get_next_line(fd);
-// 		printf("%s", str);
-// 	}
-// 	return 0;
-// }
+#include <stdio.h>
+#include <fcntl.h>
+int main()
+{
+	int fd;
+	fd = open("t.txt", O_RDONLY);
+	char *str;
+	str = get_next_line(fd);
+	printf("%s", str);
+	while (str)
+	{
+		str = get_next_line(fd);
+		printf("%s", str);
+	}
+	return 0;
+}
