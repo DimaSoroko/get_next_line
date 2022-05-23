@@ -6,11 +6,17 @@
 /*   By: dsoroko <dsoroko@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 16:18:28 by dsoroko           #+#    #+#             */
-/*   Updated: 2022/05/18 17:16:57 by dsoroko          ###   ########.fr       */
+/*   Updated: 2022/05/23 10:57:48 by dsoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+/**
+ * @brief
+ * The function make_new_line takes the stash with a line containing '\n' or
+ * end of file and eliminates everything that is after '\n'
+ */
 
 char	*make_new_line(char *str)
 {
@@ -40,6 +46,12 @@ char	*make_new_line(char *str)
 	return (line);
 }
 
+/**
+ * @brief
+ *  The function clean_up takes the stash and cleans it up, ie gets rid of the
+ *	line that is retuned by get_next_line.
+ */
+
 char	*clean_the_rest(char *str)
 {
 	int		i;
@@ -60,9 +72,15 @@ char	*clean_the_rest(char *str)
 	while (str[i] != '\0')
 		new_str[j++] = str[i++];
 	new_str[j] = '\0';
-	free (str);
+	free(str);
 	return (new_str);
 }
+
+/**
+ * @brief
+ * The function read_and_stash reads the file referenced by fd and returns
+ * what is read until '\n' or end of file is encountered.
+ */
 
 char	*read_and_stash(int fd, char *str)
 {
