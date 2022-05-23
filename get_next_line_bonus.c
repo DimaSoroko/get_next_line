@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dsoroko <dsoroko@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/10 16:18:28 by dsoroko           #+#    #+#             */
-/*   Updated: 2022/05/23 10:57:48 by dsoroko          ###   ########.fr       */
+/*   Created: 2022/05/23 11:21:36 by dsoroko           #+#    #+#             */
+/*   Updated: 2022/05/23 11:46:20 by dsoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 /**
  * @brief
@@ -109,15 +109,15 @@ char	*read_and_stash(int fd, char *str)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*stash;
+	static char	*stash[OPEN_MAX];
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	stash = read_and_stash(fd, stash);
-	if (stash == NULL)
+	stash[fd] = read_and_stash(fd, stash[fd]);
+	if (stash[fd] == NULL)
 		return (NULL);
-	line = make_new_line(stash);
-	stash = clean_the_rest(stash);
+	line = make_new_line(stash[fd]);
+	stash[fd] = clean_the_rest(stash[fd]);
 	return (line);
 }
 
