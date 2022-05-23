@@ -6,7 +6,7 @@
 /*   By: dsoroko <dsoroko@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 16:18:28 by dsoroko           #+#    #+#             */
-/*   Updated: 2022/05/23 16:38:43 by dsoroko          ###   ########.fr       */
+/*   Updated: 2022/05/23 18:46:17 by dsoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char	*read_and_stash(int fd, char *str)
 	while (!ft_strchr(str, '\n') && char_count != 0)
 	{
 		char_count = read(fd, temp, BUFFER_SIZE);
-		if (char_count == 1)
+		if (char_count == -1)
 		{
 			free(temp);
 			return (NULL);
