@@ -6,17 +6,11 @@
 /*   By: dsoroko <dsoroko@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:21:36 by dsoroko           #+#    #+#             */
-/*   Updated: 2022/05/23 17:33:09 by dsoroko          ###   ########.fr       */
+/*   Updated: 2022/05/25 11:10:35 by dsoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-
-/**
- * @brief
- * The function make_new_line takes the stash with a line containing '\n' or
- * end of file and eliminates everything that is after '\n'
- */
 
 char	*make_new_line(char *str)
 {
@@ -28,7 +22,7 @@ char	*make_new_line(char *str)
 		return (NULL);
 	while (str[i] && str[i] != '\n')
 		i++;
-	line = malloc(sizeof(char) * (i + 1));
+	line = malloc(sizeof(char) * (i + 2));
 	if (!line)
 		return (NULL);
 	i = 0;
@@ -45,12 +39,6 @@ char	*make_new_line(char *str)
 	line[i] = '\0';
 	return (line);
 }
-
-/**
- * @brief
- *  The function clean_up takes the stash and cleans it up, ie gets rid of the
- *	line that is retuned by get_next_line.
- */
 
 char	*clean_the_rest(char *str)
 {
@@ -77,12 +65,6 @@ char	*clean_the_rest(char *str)
 	free(str);
 	return (new_str);
 }
-
-/**
- * @brief
- * The function read_and_stash reads the file referenced by fd and returns
- * what is read until '\n' or end of file is encountered.
- */
 
 char	*read_and_stash(int fd, char *str)
 {
@@ -113,29 +95,12 @@ char	*get_next_line(int fd)
 	char		*line;
 	static char	*stash[OPEN_MAX];
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX)
 		return (NULL);
 	stash[fd] = read_and_stash(fd, stash[fd]);
-	if (stash[fd] == NULL)
+	if (!stash[fd])
 		return (NULL);
 	line = make_new_line(stash[fd]);
 	stash[fd] = clean_the_rest(stash[fd]);
 	return (line);
 }
-
-// #include <stdio.h>
-// #include <fcntl.h>
-// int main()
-// {
-// 	int fd;
-// 	fd = open("t.txt", O_RDONLY);
-// 	char *str;
-// 	str = get_next_line(fd);
-// 	printf("%s", str);
-// 	while (str)
-// 	{
-// 		str = get_next_line(fd);
-// 		printf("%s", str);
-// 	}
-// 	return 0;
-// }

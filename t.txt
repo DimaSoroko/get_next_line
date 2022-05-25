@@ -1,6 +1,5 @@
-Note: The dialogue will change slightly based on gender.
-
-first meeting in the Catacombs
+Note: The dialogue will change slightly based on gender...
+First meeting in the Catacombs
 Good day! You look reasonably sane!
 What are you doing in the Catacombs?
 Are you a Cleric or something?
@@ -25,6 +24,9 @@ Then everything's good, isn't it?
 I'm Trusty Patches, the one and only!
 You and I, just a couple of undead outcasts, right mate? / You and I, just a couple of undead outcasts, right, my darling?
 Heh heh heh…
+
+
+
 answer Yes
 Are you certain?!
 Well that's a fine shame. Oh, I'm truly sorry, really!

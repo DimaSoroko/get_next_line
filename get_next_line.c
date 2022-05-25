@@ -6,17 +6,11 @@
 /*   By: dsoroko <dsoroko@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 16:18:28 by dsoroko           #+#    #+#             */
-/*   Updated: 2022/05/23 18:46:17 by dsoroko          ###   ########.fr       */
+/*   Updated: 2022/05/25 11:38:02 by dsoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-/**
- * @brief
- * The function make_new_line takes the stash with a line containing '\n' or
- * end of file and eliminates everything that is after '\n'
- */
 
 char	*make_new_line(char *str)
 {
@@ -28,7 +22,7 @@ char	*make_new_line(char *str)
 		return (NULL);
 	while (str[i] && str[i] != '\n')
 		i++;
-	line = malloc(sizeof(char) * (i + 1));
+	line = malloc(sizeof(char) * (i + 2));
 	if (!line)
 		return (NULL);
 	i = 0;
@@ -46,11 +40,6 @@ char	*make_new_line(char *str)
 	return (line);
 }
 
-/**
- * @brief
- *  The function clean_up takes the stash and cleans it up
- */
-
 char	*clean_the_rest(char *str)
 {
 	int		i;
@@ -60,7 +49,7 @@ char	*clean_the_rest(char *str)
 	i = 0;
 	while (str[i] && str[i] != '\n')
 		i++;
-	if (str[i] == '\0')
+	if (!str[i])
 	{
 		free(str);
 		return (NULL);
@@ -70,18 +59,12 @@ char	*clean_the_rest(char *str)
 		return (NULL);
 	i++;
 	j = 0;
-	while (str[i] != '\0')
+	while (str[i])
 		new_str[j++] = str[i++];
 	new_str[j] = '\0';
 	free(str);
 	return (new_str);
 }
-
-/**
- * @brief
- * The function read_and_stash reads the file referenced by fd and returns
- * what is read until '\n' or end of file is encountered.
- */
 
 char	*read_and_stash(int fd, char *str)
 {
@@ -115,7 +98,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	stash = read_and_stash(fd, stash);
-	if (stash == NULL)
+	if (!stash)
 		return (NULL);
 	line = make_new_line(stash);
 	stash = clean_the_rest(stash);
@@ -135,6 +118,9 @@ char	*get_next_line(int fd)
 // 	{
 // 		str = get_next_line(fd);
 // 		printf("%s", str);
+// 		free(str);
 // 	}
-// 	return 0;
+// 	//system("leaks out");
+// 	close(fd);
+// 	return (0);
 // }
