@@ -114,6 +114,7 @@ char	*get_next_line(int fd)
 // 	char *str;
 // 	str = get_next_line(fd);
 // 	printf("%s", str);
+//	free(str);
 // 	while (str)
 // 	{
 // 		str = get_next_line(fd);
